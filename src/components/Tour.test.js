@@ -11,7 +11,7 @@ const TourProps = {
   info: "test info",
   price: "120",
   name: "tour name",
-  removeTour: jest.fn(),
+  removeTour: jest.fn(() => {}),
 };
 
 /**
@@ -46,4 +46,11 @@ test("Clicking show more button, shows more description about the tour", () => {
 
   const readmoreDisplay = findByTestAttr(wrapper, "readmore-display");
   expect(readmoreDisplay.text()).toContain(TourProps.info);
+});
+
+test("Removing a tour from tours list", () => {
+  const wrapper = setup();
+  const buttonRemove = findByTestAttr(wrapper, "remove-tour");
+  buttonRemove.simulate("click");
+  expect(TourProps.removeTour).toHaveBeenCalled();
 });
